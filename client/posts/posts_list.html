@@ -1,0 +1,6 @@
+<template name="postsList">
+  {{#each posts}}
+    <a href="{{pathFor 'postPage'}}">{{ title }} </a><br/>
+    {{ body }} <br />
+  {{/each}}
+</template>
