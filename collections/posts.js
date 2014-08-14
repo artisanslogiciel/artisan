@@ -19,3 +19,18 @@ Posts = new Meteor.Collection("posts", {
     }
   }
 });
+
+Meteor.methods({
+  post: function(postAttributes){
+    var user = Meteor.user();
+    var post = _.extend(_.pick(postAttributes, 'title', 'body'),{
+      submitted: new Date().getTime(),
+      authorId:  user._id,
+      username:  user.profile.username,
+    });
+
+    var postId = Posts.insert(post);
+
+    return postId;
+  }
+});
